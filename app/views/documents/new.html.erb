@@ -1,0 +1,46 @@
+<h1>Create New Document</h1>
+
+<%= form_with model: @document do |f| %>
+  <% if @document.errors.any? %>
+    <div class="errors">
+      <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
+      <ul>
+        <% @document.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :content, "LaTeX Content" %>
+    <%= f.text_area :content, required: true, rows: 20 %>
+  </div>
+
+  <div>
+    <%= f.submit "Create Document" %>
+    <%= link_to "Cancel", documents_path %>
+  </div>
+<% end %>
+
+<h3>Example LaTeX Content:</h3>
+<pre>
+\documentclass{article}
+\begin{document}
+\title{My Document}
+\author{Your Name}
+\date{\today}
+\maketitle
+
+\section{Introduction}
+This is a sample LaTeX document.
+
+\section{Conclusion}
+This demonstrates PDF generation from LaTeX.
+\end{document}
+</pre>

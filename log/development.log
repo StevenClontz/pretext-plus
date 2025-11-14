@@ -1,0 +1,251 @@
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY) /*application='PretextPlus'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='PretextPlus'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='PretextPlus'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-11-14 18:14:28.651129', '2025-11-14 18:14:28.651131') RETURNING "key" /*application='PretextPlus'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PretextPlus'*/[0m
+Migrating to CreateUsers (20251114181345)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='PretextPlus'*/[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar, "password_digest" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='PretextPlus'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251114181345') RETURNING "version" /*application='PretextPlus'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='PretextPlus'*/[0m
+Migrating to CreateDocuments (20251114181355)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='PretextPlus'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "documents" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "content" text, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_2be0318c46"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+) /*application='PretextPlus'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_documents_on_user_id" ON "documents" ("user_id") /*application='PretextPlus'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251114181355') RETURNING "version" /*application='PretextPlus'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='PretextPlus'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PretextPlus'*/[0m
+Started GET "/" for 127.0.0.1 at 2025-11-14 18:19:40 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='PretextPlus'*/[0m
+Processing by DocumentsController#index as HTML
+Redirected to http://localhost:3000/login
+↳ app/controllers/application_controller.rb:22:in `require_login'
+Filter chain halted as :require_login rendered or redirected
+Completed 302 Found in 15ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.8ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2025-11-14 18:19:40 +0000
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 29.6ms | GC: 20.7ms)
+  Rendered layout layouts/application.html.erb (Duration: 51.7ms | GC: 38.9ms)
+Completed 200 OK in 63ms (Views: 56.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 39.6ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2025-11-14 18:19:58 +0000
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 1.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.5ms | GC: 0.0ms)
+Completed 200 OK in 22ms (Views: 3.5ms | ActiveRecord: 1.4ms (0 queries, 0 cached) | GC: 1.5ms)
+
+
+Started POST "/signup" for 127.0.0.1 at 2025-11-14 18:20:25 +0000
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='PretextPlus',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:8:in `create'
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'test@example.com' LIMIT 1 /*action='create',application='PretextPlus',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:8:in `create'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "created_at", "updated_at") VALUES ('test@example.com', '$2a$12$J4iEpclhjYtNo9WOg8bO2OoTt6gn4awI/p7ro3.S6qfyF12kUO.4i', '2025-11-14 18:20:25.883495', '2025-11-14 18:20:25.883495') RETURNING "id" /*action='create',application='PretextPlus',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='PretextPlus',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:8:in `create'
+Redirected to http://localhost:3000/
+↳ app/controllers/users_controller.rb:10:in `create'
+Completed 302 Found in 242ms (ActiveRecord: 2.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-11-14 18:20:25 +0000
+Processing by DocumentsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering documents/index.html.erb within layouts/application
+  [1m[36mDocument Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "documents" WHERE "documents"."user_id" = 1 LIMIT 1 /*action='index',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/views/documents/index.html.erb:6
+  Rendered documents/index.html.erb within layouts/application (Duration: 1.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.1ms | GC: 0.0ms)
+Completed 200 OK in 16ms (Views: 2.6ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/documents/new" for 127.0.0.1 at 2025-11-14 18:20:45 +0000
+Processing by DocumentsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='new',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering documents/new.html.erb within layouts/application
+  Rendered documents/new.html.erb within layouts/application (Duration: 1.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.5ms | GC: 0.0ms)
+Completed 200 OK in 7ms (Views: 2.9ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/documents" for 127.0.0.1 at 2025-11-14 18:21:25 +0000
+Processing by DocumentsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "document"=>{"title"=>"My First LaTeX Document", "content"=>"\\documentclass{article}\r\n\\begin{document}\r\n\\title{My First Document}\r\n\\author{Test User}\r\n\\date{\\today}\r\n\\maketitle\r\n\r\n\\section{Introduction}\r\nThis is a sample LaTeX document created in Pretext Plus.\r\n\r\n\\section{Features}\r\nThis application allows users to:\r\n\\begin{itemize}\r\n\\item Create and manage LaTeX documents\r\n\\item Generate PDF files from LaTeX source\r\n\\item Download generated PDFs\r\n\\end{itemize}\r\n\r\n\\section{Conclusion}\r\nThis demonstrates the complete workflow of document creation and PDF generation.\r\n\\end{document}"}, "commit"=>"Create Document"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='create',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/documents_controller.rb:15:in `create'
+  [1m[36mDocument Create (1.0ms)[0m  [1m[32mINSERT INTO "documents" ("title", "content", "user_id", "created_at", "updated_at") VALUES ('My First LaTeX Document', '\documentclass{article}
+\begin{document}
+\title{My First Document}
+\author{Test User}
+\date{\today}
+\maketitle
+
+\section{Introduction}
+This is a sample LaTeX document created in Pretext Plus.
+
+\section{Features}
+This application allows users to:
+\begin{itemize}
+\item Create and manage LaTeX documents
+\item Generate PDF files from LaTeX source
+\item Download generated PDFs
+\end{itemize}
+
+\section{Conclusion}
+This demonstrates the complete workflow of document creation and PDF generation.
+\end{document}', 1, '2025-11-14 18:21:25.448053', '2025-11-14 18:21:25.448053') RETURNING "id" /*action='create',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/documents_controller.rb:15:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/documents_controller.rb:15:in `create'
+Redirected to http://localhost:3000/documents/1
+↳ app/controllers/documents_controller.rb:16:in `create'
+Completed 302 Found in 16ms (ActiveRecord: 1.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/documents/1" for 127.0.0.1 at 2025-11-14 18:21:25 +0000
+Processing by DocumentsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='show',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mDocument Load (0.1ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."user_id" = 1 AND "documents"."id" = 1 LIMIT 1 /*action='show',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/documents_controller.rb:60:in `set_document'
+  Rendering layout layouts/application.html.erb
+  Rendering documents/show.html.erb within layouts/application
+  Rendered documents/show.html.erb within layouts/application (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.3ms | GC: 0.0ms)
+Completed 200 OK in 4ms (Views: 1.7ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/documents/1/download_pdf" for 127.0.0.1 at 2025-11-14 18:21:55 +0000
+Processing by DocumentsController#download_pdf as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mDocument Load (0.1ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."user_id" = 1 AND "documents"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/documents_controller.rb:60:in `set_document'
+Sent file /tmp/d20251114-7602-i2i5y1/document.pdf (0.3ms)
+Completed 200 OK in 398ms (ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/documents/1/download_pdf" for 127.0.0.1 at 2025-11-14 18:21:55 +0000
+Processing by DocumentsController#download_pdf as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mDocument Load (0.1ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."user_id" = 1 AND "documents"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/documents_controller.rb:60:in `set_document'
+Sent file /tmp/d20251114-7602-isg1ut/document.pdf (0.2ms)
+Completed 200 OK in 117ms (ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/documents/1/download_pdf" for 127.0.0.1 at 2025-11-14 18:21:56 +0000
+Processing by DocumentsController#download_pdf as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mDocument Load (0.1ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."user_id" = 1 AND "documents"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/documents_controller.rb:60:in `set_document'
+Sent file /tmp/d20251114-7602-popgcb/document.pdf (0.2ms)
+Completed 200 OK in 117ms (ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/documents/1/download_pdf" for 127.0.0.1 at 2025-11-14 18:21:57 +0000
+Processing by DocumentsController#download_pdf as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mDocument Load (0.1ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."user_id" = 1 AND "documents"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/documents_controller.rb:60:in `set_document'
+Sent file /tmp/d20251114-7602-h937zp/document.pdf (0.2ms)
+Completed 200 OK in 119ms (ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/documents/1/download_pdf" for 127.0.0.1 at 2025-11-14 18:21:57 +0000
+Processing by DocumentsController#download_pdf as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mDocument Load (0.1ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."user_id" = 1 AND "documents"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/documents_controller.rb:60:in `set_document'
+Sent file /tmp/d20251114-7602-2w2o12/document.pdf (0.2ms)
+Completed 200 OK in 117ms (ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/documents/1/download_pdf" for 127.0.0.1 at 2025-11-14 18:21:57 +0000
+Processing by DocumentsController#download_pdf as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mDocument Load (0.1ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."user_id" = 1 AND "documents"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/documents_controller.rb:60:in `set_document'
+Sent file /tmp/d20251114-7602-iagfy9/document.pdf (0.2ms)
+Completed 200 OK in 117ms (ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/documents/1/download_pdf" for 127.0.0.1 at 2025-11-14 18:22:02 +0000
+Processing by DocumentsController#download_pdf as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mDocument Load (0.1ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."user_id" = 1 AND "documents"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/documents_controller.rb:60:in `set_document'
+Sent file /tmp/d20251114-7602-idxkt0/document.pdf (0.2ms)
+Completed 200 OK in 118ms (ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/documents/1/download_pdf" for 127.0.0.1 at 2025-11-14 18:22:02 +0000
+Processing by DocumentsController#download_pdf as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mDocument Load (0.1ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."user_id" = 1 AND "documents"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/documents_controller.rb:60:in `set_document'
+Sent file /tmp/d20251114-7602-g48tks/document.pdf (0.2ms)
+Completed 200 OK in 116ms (ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/documents/1/download_pdf" for 127.0.0.1 at 2025-11-14 18:22:02 +0000
+Processing by DocumentsController#download_pdf as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mDocument Load (0.1ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."user_id" = 1 AND "documents"."id" = 1 LIMIT 1 /*action='download_pdf',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/documents_controller.rb:60:in `set_document'
+Sent file /tmp/d20251114-7602-c5nmxr/document.pdf (0.2ms)
+Completed 200 OK in 116ms (ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/documents" for 127.0.0.1 at 2025-11-14 18:22:22 +0000
+Processing by DocumentsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering documents/index.html.erb within layouts/application
+  [1m[36mDocument Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "documents" WHERE "documents"."user_id" = 1 LIMIT 1 /*action='index',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/views/documents/index.html.erb:6
+  [1m[36mDocument Load (0.1ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."user_id" = 1 ORDER BY "documents"."created_at" DESC /*action='index',application='PretextPlus',controller='documents'*/[0m
+  ↳ app/views/documents/index.html.erb:16
+  Rendered documents/index.html.erb within layouts/application (Duration: 2.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.6ms | GC: 0.0ms)
+Completed 200 OK in 6ms (Views: 3.8ms | ActiveRecord: 0.3ms (3 queries, 0 cached) | GC: 0.0ms)
+
+

@@ -1,0 +1,29 @@
+<h1>My Documents</h1>
+
+<%= link_to "Create New Document", new_document_path %>
+
+<% if @documents.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Created</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @documents.each do |document| %>
+        <tr>
+          <td><%= link_to document.title, document %></td>
+          <td><%= document.created_at.strftime("%B %d, %Y") %></td>
+          <td>
+            <%= link_to "View", document %>
+            <%= link_to "Download PDF", download_pdf_document_path(document) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>You haven't created any documents yet. <%= link_to "Create your first document", new_document_path %></p>
+<% end %>

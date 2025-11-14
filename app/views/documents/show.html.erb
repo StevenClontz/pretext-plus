@@ -1,0 +1,11 @@
+<h1><%= @document.title %></h1>
+
+<p>Created: <%= @document.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+
+<h2>LaTeX Content:</h2>
+<pre><%= @document.content %></pre>
+
+<div>
+  <%= link_to "Download PDF", download_pdf_document_path(@document) %>
+  <%= link_to "Back to Documents", documents_path %>
+</div>
