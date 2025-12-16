@@ -51,6 +51,6 @@ module Authentication
     end
 
     def current_user
-      resume_session.user
+      @current_user = resume_session.user
     end
 end
