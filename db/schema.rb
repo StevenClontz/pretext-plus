@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_16_160153) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_16_162150) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -20,6 +20,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_16_160153) do
     t.datetime "created_at", null: false
     t.string "title"
     t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -39,5 +41,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_16_160153) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "projects", "users"
   add_foreign_key "sessions", "users"
 end

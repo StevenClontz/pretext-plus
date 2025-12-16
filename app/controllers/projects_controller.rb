@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
-    @project = Project.new
+    @project = Project.new user: current_user
   end
 
   # GET /projects/1/edit
@@ -22,6 +22,7 @@ class ProjectsController < ApplicationController
   # POST /projects or /projects.json
   def create
     @project = Project.new(project_params)
+    @project.update_attribute :user, current_user
 
     respond_to do |format|
       if @project.save
@@ -36,6 +37,7 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1 or /projects/1.json
   def update
+    @project.update_attribute :user, current_user
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: "Project was successfully updated.", status: :see_other }
