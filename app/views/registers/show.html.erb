@@ -2,7 +2,7 @@
   <h1 class="font-bold text-4xl">Register</h1>
   <%= form_with model: @user, url: register_path do |form| %>
     <% if form.object.errors.any? %>
-      <div>Error: <%= form.object.errors.full_messages.first %></div>
+      <div class="text-red-600">Error: <%= form.object.errors.full_messages.first %></div>
     <% end %>
 
     <div class="my-5">
