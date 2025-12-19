@@ -6,8 +6,13 @@
   <% end %>
 
   <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Projects</h1>
-    <%= link_to "New project", new_project_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+    <h1 class="font-bold text-4xl">
+      Projects
+      (<%= @projects.count %>/10)
+    </h1>
+    <% if @current_user && @current_user.projects.count < 10 %>
+      <%= link_to "New project", new_project_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+    <% end %>
   </div>
 
   <div id="projects" class="min-w-full space-y-5">

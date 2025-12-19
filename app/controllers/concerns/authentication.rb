@@ -22,7 +22,9 @@ module Authentication
     end
 
     def resume_session
-      Current.session ||= find_session_by_cookie
+      session = Current.session ||= find_session_by_cookie
+      @current_user = session.user
+      session
     end
 
     def find_session_by_cookie
@@ -48,9 +50,5 @@ module Authentication
     def terminate_session
       Current.session.destroy
       cookies.delete(:session_id)
-    end
-
-    def current_user
-      @current_user = resume_session.user
     end
 end

@@ -1,11 +1,12 @@
 class ProjectsController < ApplicationController
   allow_unauthenticated_access only: :share
   before_action :set_project, only: %i[ show edit update destroy ]
+  before_action :limit_projects, only: %i[ new create ]
 
   # GET /projects or /projects.json
   def index
-    @projects = Project.where user: current_user
-    @invitations = Invitation.where owner_user: current_user, recipient_user: nil
+    @projects = Project.where user: @current_user
+    @invitations = Invitation.where owner_user: @current_user, recipient_user: nil
   end
 
   # GET /projects/1 or /projects/1.json
@@ -14,7 +15,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
-    @project = Project.new user: current_user, title: "New Project"
+    @project = Project.new user: @current_user, title: "New Project"
     @project.content = <<-eos
 <p>Welcome to <em>PreTeXt.Plus!</em></p>
 <p>
@@ -36,7 +37,7 @@ class ProjectsController < ApplicationController
   # POST /projects or /projects.json
   def create
     @project = Project.new(project_params)
-    @project.update_attribute :user, current_user
+    @project.update_attribute :user, @current_user
 
     respond_to do |format|
       if @project.save
@@ -51,7 +52,7 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1 or /projects/1.json
   def update
-    @project.update_attribute :user, current_user
+    @project.update_attribute :user, @current_user
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: "Project was successfully updated.", status: :see_other }
@@ -87,5 +88,12 @@ class ProjectsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def project_params
       params.expect(project: [ :title, :content ])
+    end
+
+    # redirect if user has too many projects
+    def limit_projects
+      if @current_user && @current_user.projects.count >= 10
+        redirect_to projects_path, alert: "You have reached the maximum number of projects allowed."
+      end
     end
 end
