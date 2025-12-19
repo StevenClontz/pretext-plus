@@ -62,17 +62,8 @@ class ProjectsController < ApplicationController
   end
 
   def share
-    require "uri"
-    require "net/http"
     @project = Project.find(params.expect(:project_id))
-    # post @project to build.pretext.plus
-    params = {
-      source: @project.content,
-      title: @project.title,
-      token: ENV["BUILD_TOKEN"]
-    }
-    response = Net::HTTP.post_form(URI.parse("https://build.pretext.plus"), params)
-    render html: response.body.html_safe
+    render html: @project.html_source.html_safe
   end
 
   private
