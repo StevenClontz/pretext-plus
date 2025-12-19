@@ -14,7 +14,19 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
-    @project = Project.new user: current_user
+    @project = Project.new user: current_user, title: "New Project"
+    @project.content = <<-eos
+<p>Welcome to <em>PreTeXt.Plus!</em></p>
+<p>
+  This is a sample project to get you started. You can edit this content using the
+  PreTeXt markup language. For more information on how to use PreTeXt, please visit
+  <url href="https://pretextbook.org/doc/guide/html/">The PreTeXt Guide</url>.
+  <fn>Note: currently, PreTeXt.Plus only supports a subset of PreTeXt features, and only
+  allows authoring the content of an <c>&lt;article/&gt;</c>. We look forward to
+  expanding this in the future!</fn>
+</p>
+<p>Feel free to delete this sample content and start creating your own project. Happy writing!</p>
+    eos
   end
 
   # GET /projects/1/edit
