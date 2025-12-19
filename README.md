@@ -1,24 +1,7 @@
-# pretext-plus
+# PreTeXt.Plus
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby on Rails application for the main [PreTeXt.Plus](https://pretext.plus) service.
 
-Things you may want to cover:
+## Development
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Open in a codespace, run `bin/dev`. Set port `3000` to `public` then preview the app.
