@@ -91,7 +91,7 @@
                 </div>
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <%= image_tag "logo.svg" %>
+                <%= image_tag "logo.svg", alt: "PreTeXt.Plus logo" %>
             </div>                
         </div>
     </section>
@@ -101,27 +101,27 @@
         <div class="max-w-screen-xl px-4 pb-8 mx-auto lg:pb-16">
             <div class="grid grid-cols-2 gap-8 text-gray-500 sm:gap-12 sm:grid-cols-3 lg:grid-cols-6 dark:text-gray-400">
                 <a href="https://aimath.org" class="flex items-center lg:justify-center">
-                    <%= image_tag "aim-logo-white.svg", class: "hidden dark:inline-block" %>
-                    <%= image_tag "aim-logo-black.svg", class: "dark:hidden" %>
+                    <%= image_tag "aim-logo-white.svg", class: "hidden dark:inline-block", alt: "American Institute of Mathematics logo" %>
+                    <%= image_tag "aim-logo-black.svg", class: "dark:hidden", alt: "American Institute of Mathematics logo" %>
                 </a>
                 <a href="https://tbil.org" class="flex items-center lg:justify-center">
-                    <%= image_tag "tbil-logo-white.svg", class: "hidden dark:inline-block" %>
-                    <%= image_tag "tbil-logo-black.svg", class: "dark:hidden" %>
+                    <%= image_tag "tbil-logo-white.svg", class: "hidden dark:inline-block", alt: "Team Based Inquiry Learning logo" %>
+                    <%= image_tag "tbil-logo-black.svg", class: "dark:hidden", alt: "Team Based Inquiry Learning logo" %>
                 </a>
                 <a href="https://discrete.openmathbooks.org/dmoi4.html" class="flex items-center lg:justify-center">
-                    <%= image_tag "dmoi-logo-white.svg", class: "hidden dark:inline-block" %>
-                    <%= image_tag "dmoi-logo-black.svg", class: "dark:hidden" %>
+                    <%= image_tag "dmoi-logo-white.svg", class: "hidden dark:inline-block", alt: "Discrete Mathematics Open Intro logo" %>
+                    <%= image_tag "dmoi-logo-black.svg", class: "dark:hidden", alt: "Discrete Mathematics Open Intro logo" %>
                 </a>
                 <a href="https://simiode.qubeshub.org/" class="flex items-center lg:justify-center">
-                    <%= image_tag "simiode-logo-white.svg", class: "hidden dark:inline-block" %>
-                    <%= image_tag "simiode-logo-black.svg", class: "dark:hidden" %>
+                    <%= image_tag "simiode-logo-white.svg", class: "hidden dark:inline-block", alt: "SIMIODE logo" %>
+                    <%= image_tag "simiode-logo-black.svg", class: "dark:hidden", alt: "SIMIODE logo" %>
                 </a>
                 <a href="https://landing.runestone.academy/" class="flex items-center lg:justify-center">
-                    <%= image_tag "runestone-logo-white.svg", class: "hidden dark:inline-block" %>
-                    <%= image_tag "runestone-logo-black.svg", class: "dark:hidden" %>
+                    <%= image_tag "runestone-logo-white.svg", class: "hidden dark:inline-block", alt: "Runestone Academy logo" %>
+                    <%= image_tag "runestone-logo-black.svg", class: "dark:hidden", alt: "Runestone Academy logo" %>
                 </a>
                 <a href="https://www.nsf.gov" class="flex items-center lg:justify-center">
-                    <%= image_tag "nsf-logo.svg" %>
+                    <%= image_tag "nsf-logo.svg", alt: "National Science Foundation logo" %>
                 </a>
             </div>
         </div>
@@ -163,11 +163,14 @@
                         Create documents with universal design in mind, thanks to PreTeXt.
                     </p>
                 </div>
-                <img class="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex" src="https://aimath.org/~farmer/braille/braille_bubble.jpg" alt="braille mathematics">
+                <img 
+                    class="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex" 
+                    src="https://aimath.org/~farmer/braille/braille_bubble.jpg" 
+                    alt="braille mathematics">
             </div>
             <!-- Row -->
             <div class="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16">
-                <%= image_tag "editor-screenshot.png", class: "hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex" %>
+                <%= image_tag "editor-screenshot.png", class: "hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex", alt: "PreTeXt.Plus editor screenshot" %>
                 <div class="text-gray-500 sm:text-lg dark:text-gray-400">
                     <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
                         Getting started with PreTeXt has never been easier! 
@@ -295,7 +298,7 @@
                     </p>
                 </blockquote>
                 <figcaption class="flex items-center justify-center mt-6 space-x-3">
-                    <%= image_tag "levin.jpg", class: "w-6 h-6 rounded-full" %>
+                    <%= image_tag "levin.jpg", class: "w-6 h-6 rounded-full", alt: "Oscar Levin headshot" %>
                     <div class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
                         <div class="pr-3 font-medium text-gray-900 dark:text-white">Oscar Levin</div>
                         <div class="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">Author of Discrete Mathematics: An Open Introduction</div>
