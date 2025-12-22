@@ -21,6 +21,6 @@ class RegistersController < ApplicationController
   private
 
   def sign_up_params
-    params.expect(user: [ :email_address, :password, :invite_code ])
+    params.expect(user: [ :email, :password, :invite_code ])
   end
 end

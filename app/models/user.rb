@@ -3,9 +3,9 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   has_many :projects, dependent: :destroy
 
-  normalizes :email_address, with: ->(e) { e.strip.downcase }
+  normalizes :email, with: ->(e) { e.strip.downcase }
 
-  validates_uniqueness_of :email_address
+  validates_uniqueness_of :email
 
   attr_accessor :invite_code
 
