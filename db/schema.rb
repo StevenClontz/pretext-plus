@@ -29,7 +29,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_19_193238) do
   create_table "projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "content"
     t.datetime "created_at", null: false
-    t.text "html"
     t.text "html_source"
     t.string "title"
     t.datetime "updated_at", null: false
