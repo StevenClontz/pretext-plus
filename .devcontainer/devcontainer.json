@@ -33,5 +33,5 @@
 
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "bin/setup --skip-server"
+  "postCreateCommand": "bin/setup --skip-server && echo $DEVELOPMENT_KEY > config/credentials/development.key"
 }
