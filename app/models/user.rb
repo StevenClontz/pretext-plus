@@ -12,6 +12,8 @@ class User < ApplicationRecord
   before_create :validate_invite_code
   after_create_commit :expire_invite
 
+  pay_customer
+
   private
 
   def validate_invite_code
@@ -29,5 +31,10 @@ class User < ApplicationRecord
       throw :abort
     end
     valid_invite.update!(recipient_user_id: self.id)
+  end
+
+  def pay_should_sync_customer?
+    # super will invoke Pay's default (e-mail changed)
+    super || self.saved_change_to_name?
   end
 end
