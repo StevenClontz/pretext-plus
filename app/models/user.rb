@@ -12,8 +12,6 @@ class User < ApplicationRecord
   before_create :validate_invite_code
   after_create_commit :expire_invite
 
-  pay_customer default_payment_processor: :stripe
-
   private
 
   def validate_invite_code
