@@ -54,6 +54,10 @@
         <div class="w-full flex justify-center cursor-pointer" onclick="this.remove()">
           <p class="mt-20 py-2 px-3 border-blue-200 border text-blue-500 font-medium rounded-md inline-block" id="notice">⚠ <%= notice %></p>
         </div>
+      <% elsif params[:alert].present? %>
+        <div class="w-full flex justify-center cursor-pointer" onclick="this.remove()">
+          <p class="mt-20 py-2 px-3 border-blue-200 border text-blue-500 font-medium rounded-md inline-block" id="notice">⚠ <%= params[:alert] %></p>
+        </div>
       <% end %>
       <main class="w-full flex">
         <%= yield %>
