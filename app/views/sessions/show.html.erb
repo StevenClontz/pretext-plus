@@ -17,7 +17,7 @@
     </div>
   <% end %>
   <div class="my-4">
-    <h1 class="font-bold text-4xl mb-4">Subscriptions</h1>
+    <h1 class="font-bold text-4xl mb-4">Subscription</h1>
     <%= form_with url: subscribe_path, data: { turbo: false } do |form| %>
       <ul role="list" class="space-y-8 md:grid md:grid-cols-2 md:space-y-0">
         <%= render "subscriptions/beta" do %>
