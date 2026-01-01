@@ -27,6 +27,14 @@ export default class extends Controller {
       }
     }
 
+    // Save with Ctrl+S or Cmd+S
+    document.addEventListener("keydown", function(e) {
+      if ((e.key === 's' || e.key === 'S') && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        onSaveButton();
+      }
+    }, false);
+
     const onPreviewRebuild = async (content, title, postToIframe) => {
       const token = tokenField.value;
       const postData = { source: content, title: title, token: token };
