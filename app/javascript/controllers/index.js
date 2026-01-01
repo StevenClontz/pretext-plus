@@ -3,5 +3,6 @@
 // ./bin/rails generate stimulus controllerName
 
 import { application } from "./application"
-import FormatController from "./format_controller"
-application.register("format", FormatController)
+
+import EditorController from "./editor_controller"
+application.register("editor", EditorController)

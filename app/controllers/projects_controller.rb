@@ -17,16 +17,36 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new user: @current_user, title: "New Project"
     @project.content = <<-eos
-<p>Welcome to <em>PreTeXt.Plus!</em></p>
-<p>
-  This is a sample project to get you started. You can edit this content using the
-  PreTeXt markup language. For more information on how to use PreTeXt, please visit
-  <url href="https://pretextbook.org/doc/guide/html/">The PreTeXt Guide</url>.
-  <fn>Note: currently, PreTeXt.Plus only supports a subset of PreTeXt features, and only
-  allows authoring the content of an <c>&lt;article/&gt;</c>. We look forward to
-  expanding this in the future!</fn>
-</p>
-<p>Feel free to delete this sample content and start creating your own project. Happy writing!</p>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section>
+  <title> Welcome to PreTeXt.Plus! </title>
+
+  <p>
+    This is a sample project to get you started. You can edit this content using the PreTeXt markup language.
+    <me>
+      \\left|\\sum_{i=0}^n a_i\\right|\\leq\\sum_{i=0}^n|a_i|
+    </me>
+  </p>
+
+  <fact>
+    <statement>
+      <p>
+        For more information on how to use PreTeXt, please visit <c>https://pretextbook.org/doc/guide/html/</c>.
+      </p>
+    </statement>
+  </fact>
+
+  <note>
+    <p>
+      Note: currently, PreTeXt.Plus only supports a subset of PreTeXt features, and only allows authoring the content of an <c>article</c>. We look forward to expanding this in the future!
+    </p>
+  </note>
+
+  <p>
+    Feel free to delete this sample content and start creating your own project. Happy writing!
+  </p>
+</section>
     eos
   end
 
