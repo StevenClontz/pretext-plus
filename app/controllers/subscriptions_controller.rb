@@ -19,6 +19,7 @@ class SubscriptionsController < ApplicationController
         mode: "subscription",
         success_url: "#{success_url}?alert=#{alert}"
       })
+      @current_user.update stripe_checkout_session_id: session.id
     else
       alert = CGI.escape "Your subscription has been successfully managed!"
       checkout_session = Stripe::Checkout::Session.retrieve(
