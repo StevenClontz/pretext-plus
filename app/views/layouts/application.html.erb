@@ -42,8 +42,8 @@
                   About
                 <% end %>
                 <% if @current_user.present? %>
-                  <%= link_to :session, data: { turbo_method: :delete }, class: "my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" do %>
-                    Sign out (<%= @current_user.email_address %>)
+                  <%= link_to :session, class: "my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" do %>
+                    Account (<%= @current_user.email %>)
                   <% end %>
                 <% end %>
             </div>
@@ -53,6 +53,10 @@
       <% if notice.present? %>
         <div class="w-full flex justify-center cursor-pointer" onclick="this.remove()">
           <p class="mt-20 py-2 px-3 border-blue-200 border text-blue-500 font-medium rounded-md inline-block" id="notice">⚠ <%= notice %></p>
+        </div>
+      <% elsif params[:alert].present? %>
+        <div class="w-full flex justify-center cursor-pointer" onclick="this.remove()">
+          <p class="mt-20 py-2 px-3 border-blue-200 border text-blue-500 font-medium rounded-md inline-block" id="notice">⚠ <%= params[:alert] %></p>
         </div>
       <% end %>
       <main class="w-full flex">

@@ -5,4 +5,8 @@ class Invitation < ApplicationRecord
   def used?
     recipient_user_id.present?
   end
+
+  def self.create_from_first_user
+    self.create owner_user: User.first
+  end
 end

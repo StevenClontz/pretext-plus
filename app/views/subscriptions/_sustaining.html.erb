@@ -1,0 +1,12 @@
+<%= render "subscriptions/card", {
+        name: "Sustaining",
+        description: "Support our overhead costs through your monetary support, and get access to authoring even more projects!",
+        price: "$5",
+        features: [
+            "Pay securely online",
+            "Cancel anytime",
+            "Document limit: 100 projects",
+        ]
+    } do %>
+    <%= yield %>
+<% end %>

@@ -25,6 +25,8 @@ module PretextPlus
     # config.eager_load_paths << Rails.root.join("extras")
     #
 
+    config.action_mailer.default_url_options = { host: "pretext.plus" }
+
     # use uuids
     config.generators do |generate|
       generate.orm :active_record, primary_key_type: :uuid
